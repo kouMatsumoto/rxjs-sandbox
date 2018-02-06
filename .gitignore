@@ -57,3 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# IDE configs
+.idea
+
+# compiled js files
+src/**/*.js
+src/**/*.js.map
