@@ -52,17 +52,19 @@ describe('sandbox test', () => {
   });
 
   it('test 4', () => {
-    const lifted$ = <AnonymousSubject<null>>root$.pipe(tap(() => {}));
-    expect(lifted$).not.to.equal(root$);
-    expect(root$.observers.length).to.equal(0);
-    expect(lifted$.observers.length).to.equal(0);
+    const lifted1$ = <AnonymousSubject<null>>root$.pipe(tap(() => {}));
+    const lifted2$ = <AnonymousSubject<null>>lifted1$.pipe(tap(() => {}));
 
-    const subscription = lifted$.subscribe();
-    expect(lifted$.observers.length).to.equal(0);
+    lifted1$.subscribe();
+    expect(lifted1$.observers.length).to.equal(0);
     expect(root$.observers.length).to.equal(1);
 
-    subscription.unsubscribe();
-    expect(lifted$.observers.length).to.equal(0);
-    expect(root$.observers.length).to.equal(0);
+    lifted2$.subscribe();
+    expect(lifted2$.observers.length).to.equal(0);
+    expect(lifted1$.observers.length).to.equal(0);
+    expect(root$.observers.length).to.equal(2);
+
+    lifted2$.subscribe();
+    expect(root$.observers.length).to.equal(3);
   });
 });
