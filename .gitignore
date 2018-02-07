@@ -62,6 +62,4 @@ typings/
 
 # compiled js files
 src/**/*.js
-src/**/*.js
-spec/**/*.js.map
-spec/**/*.js.map
+src/**/*.js.map
